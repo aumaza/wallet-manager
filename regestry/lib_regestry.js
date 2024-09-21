@@ -98,8 +98,7 @@ $(document).ready(function(){
                         console.log(values);
                         setTimeout(function() { $(".close").click(); }, 5000);
                     }
-                    
-                    
+
                     else if(r == ''){
                         //console.log(formData);
                     }

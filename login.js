@@ -1,4 +1,4 @@
-// INSERTAR NUEVO REGISTRO DE USUARIO
+//LOG-IN
 $(document).ready(function(){
     $('#login').click(function(){
         
@@ -32,7 +32,10 @@ $(document).ready(function(){
                      $('#user').val('');
                      $('#pwd').val('');
                     //console.log(values);
-                    setTimeout(function() { location.href="core/main/main.php" }, 4000);
+                    setTimeout(function() { window.close(); }, 3000);
+                    setTimeout(function() { window.opener.location.href="core/main/main.php"; }, 2000);
+
+
                     }else if(r == -1){
                         var mensaje = `<br><div class="alert alert-danger alert-dismissible">
                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -79,3 +82,28 @@ $(document).ready(function(){
         return false;
     });
 });
+
+
+// =================================================================================================== //
+// CALLERS
+// =================================================================================================== //
+
+function callLogIn(){
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=560,left=500,top=250`;
+    open("log_in.php", "ingreso", params);
+}
+
+function callPassword(){
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=660,left=500,top=200`;
+    open("password/password.php", "password", params);
+}
+
+function callRegestry(){
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=900,left=500,top=100`;
+    open("regestry/regestry.php", "regestry", params);
+}
+
+function callAbout(){
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=350,left=500,top=250`;
+    open("about.php", "about", params);
+}

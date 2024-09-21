@@ -7,7 +7,8 @@ function mainNavBar($nombre,$avatar){
 			  <div class="container-fluid">
 			    <div class="navbar-header">
 			    <form action="#" method="POST">
-			      <button class="btn btn-default btn-sm navbar-btn" type="submit" name="home"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático</button>
+			      <button class="btn btn-default btn-sm navbar-btn" type="submit" name="home">
+                    <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Wallet Manager</button>
 			    </form>
 			    </div>
 
@@ -22,23 +23,31 @@ function mainNavBar($nombre,$avatar){
 			    
 			    <ul class="nav navbar-nav navbar-right">
 			      
-			      <div class="dropdown">
-				    <button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-toggle="tooltip" title="Menú"><img src="'.$avatar.'" alt="Avatar" class="avatar" /> '.$nombre.'</button>
-				    <ul class="dropdown-menu">
+			      <div class="dropdown">';
+
+                    if($avatar != 'null'){
+                        echo '<button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-            toggle="tooltip" title="Menú"><img src="'.$avatar.'" alt="" class="avatar" /> '.$nombre.'</button>';
+                    }else{
+                        echo '<button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-            toggle="tooltip" title="Menú"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> '.$nombre.'</button>';
+                    }
+				    echo '<ul class="dropdown-menu">
 				    <form action="#" method="POST">
 				      <li class="dropdown-header">Menú del Usuario</li>
 				      <li><button type="submit" name="user_bio" class="btn btn-default btn-sm btn-block">
 				      	<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Mis Datos</button></li>
 				      
-				      <li><button type="submit" name="devices" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Equipos</button></li>
-				      
-				      <li><button type="submit" name="map" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Mapa Equipos</button></li>
+				      <li><button type="submit" name="empresas" class="btn btn-default btn-sm btn-block">
+				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Empresas</button></li>
+
+				      	<li><button type="submit" name="servicios" class="btn btn-default btn-sm btn-block">
+				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Servicios</button></li>
+
+				      	<li><button type="submit" name="pagos" class="btn btn-default btn-sm btn-block">
+				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Pagos</button></li>
 				      
 				      <li class="divider"></li>
 				      <li class="dropdown-header">Menú del sistema</li>
-				      <li><button type="submit" name="users" class="btn btn-default btn-sm btn-block">
+				      <li><button type="submit" name="usuarios" class="btn btn-default btn-sm btn-block">
 				      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</button></li>
 				      
 				      <li><button class="btn btn-danger btn-sm btn-block" type="submit" name="exit">

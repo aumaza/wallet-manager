@@ -7,56 +7,49 @@
 
 function skeleton(){
 
-  echo '<link rel="stylesheet" href="/parque-informatico/skeleton/css/bootstrap.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/bootstrap-theme.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/bootstrap-theme.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/scrolling-nav.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/font-awesome.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/core/main/main.css" >
+  echo '<link rel="stylesheet" href="/wallet-manager/skeleton/css/bootstrap.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/bootstrap-theme.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/bootstrap-theme.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/scrolling-nav.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/font-awesome.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/core/main/main.css" >
 			
-		<link rel="stylesheet" href="/parque-informatico/skeleton/Chart.js/Chart.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/Chart.js/Chart.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/Chart.js/Chart.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/Chart.js/Chart.css" >
 		
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/jquery.dataTables.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/buttons.dataTables.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/buttons.bootstrap.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/css/jquery.dataTables-1.11.5.min.css" >
-		<link rel="stylesheet" href="/parque-informatico/skeleton/dataTables/fixedColumns.dataTables.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/jquery.dataTables.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/buttons.dataTables.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/buttons.bootstrap.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/css/jquery.dataTables-1.11.5.min.css" >
+		<link rel="stylesheet" href="/wallet-manager/skeleton/dataTables/fixedColumns.dataTables.min.css" >
 		
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 	    
-	    <script src="/parque-informatico/skeleton/js/jquery-3.4.1.min.js"></script>
-	    <script src="/parque-informatico/skeleton/js/jquery-3.5.1.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/bootstrap.min.js"></script>
+	    <script src="/wallet-manager/skeleton/js/jquery-3.4.1.min.js"></script>
+	    <script src="/wallet-manager/skeleton/js/jquery-3.5.1.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/bootstrap.min.js"></script>
 		
-		<script src="/parque-informatico/skeleton/js/jquery.dataTables.min.js"></script>
-		<script src="/parque-informatico/skeleton/dataTables/DataTables/js/jquery.dataTables1.min.js"></script>
-		<script src="/parque-informatico/skeleton/dataTables/DataTables/js/dataTables.fixedColumns.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/jquery.dataTables.min.js"></script>
+		<script src="/wallet-manager/skeleton/dataTables/DataTables/js/jquery.dataTables1.min.js"></script>
+		<script src="/wallet-manager/skeleton/dataTables/DataTables/js/dataTables.fixedColumns.min.js"></script>
 		
-		<script src="/parque-informatico/skeleton/js/dataTables.editor.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/dataTables.select.min.js"></script>
-		<script src="/parque-informatico-informatico/skeleton/js/dataTables.buttons.min.js"></script>
-		<script src="/parque-informatico/skeleton/dataTables/DataTables/js/buttons.colVis.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/dataTables.editor.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/dataTables.select.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/dataTables.buttons.min.js"></script>
+		<script src="/wallet-manager/skeleton/dataTables/DataTables/js/buttons.colVis.min.js"></script>
 		
-		<script src="/parque-informatico/skeleton/js/jszip.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/pdfmake.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/vfs_fonts.js"></script>
-		<script src="/parque-informatico/skeleton/js/buttons.html5.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/buttons.bootstrap.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/buttons.print.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/jszip.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/pdfmake.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/vfs_fonts.js"></script>
+		<script src="/wallet-manager/skeleton/js/buttons.html5.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/buttons.bootstrap.min.js"></script>
+		<script src="/wallet-manager/skeleton/js/buttons.print.min.js"></script>
 		
-		<script src="/parque-informatico/skeleton/js/bootbox/bootbox.all.js"></script>
-		<script src="/parque-informatico/skeleton/js/bootbox/bootbox.all.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/bootbox/bootbox.js"></script>
-		<script src="/parque-informatico/skeleton/js/bootbox/bootbox.locales.js"></script>
-		<script src="/parque-informatico/skeleton/js/bootbox/bootbox.locales.min.js"></script>
-		<script src="/parque-informatico/skeleton/js/bootbox/bootbox.min.js"></script>
-		
-		<script src="/parque-informatico/skeleton/Chart.js/Chart.min.js"></script>
-		<script src="/parque-informatico/skeleton/Chart.js/Chart.bundle.min.js"></script>
-		<script src="/parque-informatico/skeleton/Chart.js/Chart.bundle.js"></script>
-		<script src="/parque-informatico/skeleton/Chart.js/Chart.js"></script>';
+		<script src="/wallet-manager/skeleton/Chart.js/Chart.min.js"></script>
+		<script src="/wallet-manager/skeleton/Chart.js/Chart.bundle.min.js"></script>
+		<script src="/wallet-manager/skeleton/Chart.js/Chart.bundle.js"></script>
+		<script src="/wallet-manager/skeleton/Chart.js/Chart.js"></script>';
 }
 
 
@@ -64,7 +57,7 @@ function formLogIn(){
 
 		echo '<div class="container">
 					<div class="jumbotron">
-					<h1><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático</h1>
+					<h1><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Wallet Manager</h1>
 					<p>Ingrese sus datos</p><hr>
   
 				   <form id="fr_login_ajax" method="POST">
@@ -101,7 +94,7 @@ function logIn($user,$pass,$conn,$db_basename){
 	$_SESSION['user'] = $user;
 	$_SESSION['pass'] = $pass;
 	
-	$sql_1 = "select password from pi_usuarios where user = '$user'";
+	$sql_1 = "select password from wm_usuarios where user = '$user'";
 	$query_1 = mysqli_query($conn,$sql_1);
 	while($row = mysqli_fetch_array($query_1)){
         $hash = $row['password'];
@@ -109,10 +102,10 @@ function logIn($user,$pass,$conn,$db_basename){
 	
     
     
-	$sql = "SELECT * FROM pi_usuarios where user = '$user' and role = 1";
+	$sql = "SELECT * FROM wm_usuarios where user = '$user' and role = 1";
 	$q = mysqli_query($conn,$sql);
 	
-	$query = "SELECT * FROM pi_usuarios where user = '$user' and role = 0";
+	$query = "SELECT * FROM wm_usuarios where user = '$user' and role = 0";
 	$retval = mysqli_query($conn,$query);
 	
 	
@@ -130,7 +123,7 @@ function logIn($user,$pass,$conn,$db_basename){
 
 			else if(($user = mysqli_fetch_assoc($q)) && (password_verify($pass,$hash))){
 
-				if(strcmp($_SESSION["user"], 'root@mecon.gov.ar') == 0){
+				if(strcmp($_SESSION["user"], 'root@gmail.com') == 0){
 
 					echo 1; // LOGIN SUCCESSFULLY
 				
@@ -170,20 +163,110 @@ function logOut($nombre){
 
 }
 
-function home(){
+function home($nombre){
 
-	echo '<div class="container"> 
+	echo '<div class="container">
     			<div class="jumbotron">
     			<footer class="container-fluid text-center">
-					  <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático
-					</footer><hr>
-                	<p align=center><img src="../img/devices.png"  class="img-reponsive img-rounded" style="width:70%"></p><hr>
-                	
-                	<footer class="container-fluid text-center">
+					  <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Wallet Manager
+					</footer><hr>';
+					if($nombre == ''){
+                        echo '<p align=center><img src="core/img/wallet_home.jpg"  class="img-reponsive img-rounded" style="width:60%"></p><hr>';
+                    }
+                    if($nombre != ''){
+                        echo '<p align=center><img src="../img/wallet_home.jpg"  class="img-reponsive img-rounded" style="width:60%"></p><hr>';
+                    }
+
+                	echo '<footer class="container-fluid text-center">
 					  Develop by <a href="mailto:develslack@gmail.com">Slackzone Development</a>
 					</footer>
           		</div>
             </div>';
+}
+
+function about(){
+
+    echo '<div class="container">
+                <div class="jumbotron">
+                <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Acerca de...</h2><hr>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Tecnologías</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                        </u>
+                        <li>Bootstrap 3.4</li>
+                        <li>PHP 7.4 o superior</li>
+                        <li>Mysql 10.3 o superior</li>
+                        <li>JavaScript</li>
+                        </u>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Desarrolladores</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                        <ul>
+                        <li>Augusto Maza</li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Descripción</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                        <ul>
+                        <li>Aplicación para llevar la cuenta y administración de gastos personales.</li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                </div>';
+
+}
+
+/*
+** GUARDAR LOS ERRORES DE MYSQL
+*/
+function mysqlErrorLogs($error){
+
+      $fileName = "mysql_error.log";
+      $date = date("d-m-Y H:i:s");
+      $message = 'Error: '.$error.' - '.$date;
+
+        if (file_exists($fileName)){
+
+        $file = fopen($fileName, 'a');
+        fwrite($file, "\n".$date);
+        fclose($file);
+        //chmod($file, 0777);
+
+        }else{
+            $file = fopen($fileName, 'w');
+            fwrite($file, $message);
+            fclose($file);
+            //chmod($file, 0777);
+            }
+
 }
 
 

@@ -115,7 +115,7 @@ public function formRegestry(){
 					</div>
 
 					<div class="alert alert-info">
-					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><strong>Atención!</strong> Puede seleccionar una imagen a modo de Avatar. No es obligatorio realizarlo ahora, padrá agregarla más tarde.
+					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><strong>Atención!</strong> Puede seleccionar una imagen a modo de Avatar. No es obligatorio realizarlo ahora, podrá agregarla más tarde.
 					</div>
 
 					<div class="form-group">
@@ -161,12 +161,13 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 
 	if($conn){
 
+
 		if(((strlen($password_1) >= 10) && (strlen($password_1) <= 15)) && ((strlen($password_2) >= 10) && (strlen($password_2) <= 15))){
 
 			if((strcmp($password_2,$password_1) == 0)){
 
 				mysqli_select_db($conn,$dbname);
-                $sql = "select * from pi_usuarios where email = '$email' or nombre = '$name'";
+                $sql = "select * from wm_usuarios where email = '$email' or name = '$name'";
                 $query = mysqli_query($conn,$sql);
                 $rows = mysqli_num_rows($query);
 
@@ -192,12 +193,12 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 									        if(move_uploaded_file($_FILES["my_file"]["tmp_name"], $targetFilePath)){
 									        
 									        
-									        $sql_1 = "INSERT INTO pi_usuarios ".
-									                "(nombre,
+									        $sql_1 = "INSERT INTO wm_usuarios ".
+									                "(name,
 									                  user,
 									                  password,
 									                  email,
-									                  functions,
+									                  task,
 									                  avatar,
 									                  role)".
 									                "VALUES ".
@@ -237,12 +238,12 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 
 		                    	}if($file == ''){
 
-		                    		$sql_2 = "INSERT INTO pi_usuarios ".
-									                "(nombre,
+		                    		$sql_2 = "INSERT INTO wm_usuarios ".
+									                "(name,
 									                  user,
 									                  password,
 									                  email,
-									                  functions,
+									                  task,
 									                  role)".
 									                "VALUES ".
 									                  "($oneRegestry->setName('$name'),
@@ -263,7 +264,9 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 									        
 									                       
 									            }else{
-											  
+
+                                                    $error = "Alta de usuario ".mysqli_error($conn);
+                                                    $oneRegestry->regestryMysqlError($error);
 												   echo -1; // hubo un problema al insertar el registro
 									            
 									            }
@@ -282,9 +285,37 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 			echo 11; // LOS PASSWORD DEBEN TENER ENTRE 10 Y 15 CARACTERES
 		}
 	
-	}else{
+	}
+	else{
 		echo 7; // NO CONECTION TO DATABASE
 	}
+
+
+} // END OF FUNCTION
+
+
+/*
+** GUARDAR LOS ERRORES DE MYSQL
+*/
+public function regestryMysqlError($error){
+
+      $fileName = "mysql_error.log";
+      $date = date("d-m-Y H:i:s");
+      $message = 'Error: '.$error.' - '.$date;
+
+        if (file_exists($fileName)){
+
+        $file = fopen($fileName, 'a');
+        fwrite($file, "\n".$date);
+        fclose($file);
+        chmod($file, 0777);
+
+        }else{
+            $file = fopen($fileName, 'w');
+            fwrite($file, $message);
+            fclose($file);
+            chmod($file, 0777);
+            }
 
 } // END OF FUNCTION
 

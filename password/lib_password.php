@@ -107,7 +107,7 @@ public function validatePassword($password_1,$password_2){
 public function resetPassword($onePassword,$user,$password_1,$password_2,$conn,$dbname){
 
 	mysqli_select_db($conn,$dbname);
-	$sql = "select user from pi_usuarios where user = $onePassword->getUser('$user')";
+	$sql = "select user from wm_usuarios where user = $onePassword->getUser('$user')";
 	$query = mysqli_query($conn,$sql);
 	$rows = mysqli_num_rows($query);
 
@@ -119,13 +119,15 @@ public function resetPassword($onePassword,$user,$password_1,$password_2,$conn,$
 
 			$passHash = password_hash($password_1, PASSWORD_BCRYPT);
 
-			$sql_1 = "update pi_usuarios set password = $onePassword->setPassword('$passHash') where user = $onePassword->getUser('$user')";
+			$sql_1 = "update wm_usuarios set password = $onePassword->setPassword('$passHash') where user = $onePassword->getUser('$user')";
 			$query_1 = mysqli_query($conn,$sql_1);
 
 			if($query_1){
 				echo 1; // PASSWORD SUCCESSFULLY UPDATES
 			}else{
-				echo -1; // SOMETHING GO WRONG ON UPDATE PASSWORD
+				$error = "Actualizar Password. " .mysqli_error($conn);
+                $onePassword->passwordMysqlError($error);
+                echo -1; // SOMETHING GO WRONG ON UPDATE PASSWORD
 			}
 		}
 
@@ -143,6 +145,32 @@ public function resetPassword($onePassword,$user,$password_1,$password_2,$conn,$
 	}
 
 } // END OF FUNCTION 
+
+
+/*
+** GUARDAR LOS ERRORES DE MYSQL
+*/
+public function passwordMysqlError($error){
+
+      $fileName = "mysql_error.log";
+      $date = date("d-m-Y H:i:s");
+      $message = 'Error: '.$error.' - '.$date;
+
+        if (file_exists($fileName)){
+
+        $file = fopen($fileName, 'a');
+        fwrite($file, "\n".$date);
+        fclose($file);
+        chmod($file, 0777);
+
+        }else{
+            $file = fopen($fileName, 'w');
+            fwrite($file, $message);
+            fclose($file);
+            chmod($file, 0777);
+            }
+
+} // END OF FUNCTION
 
 } // END OF CLASS
 

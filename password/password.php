@@ -10,35 +10,17 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <title>Parque Informático - Cambio de Password</title>
+  <title>Wallet Manager - Cambio de Password</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php skeleton(); ?>
 
 </head>
-<body style = "background: #839192;">
+<body style = "background: #FF4433;"><br>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="../#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="../regestry/regestry.php"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registrarse</a></li>
-    </ul>
-    <?php
-    	if($conn){
-    		echo '<button class="btn btn-success navbar-btn" data-toggle="tooltip" data-placement="top" title="Database Connexion Succesfully!"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Connexion</button>';
-    	}else{
-    		echo '<button class="btn btn-danger navbar-btn" data-toggle="tooltip" data-placement="top" title="Database Connexion Failure!"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Connexion</button>';
-    	}
-    	
-    ?>
-  </div>
-</nav>
-<br>
+
 	
 	<?php
 
