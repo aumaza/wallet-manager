@@ -89,21 +89,37 @@ $(document).ready(function(){
 // =================================================================================================== //
 
 function callLogIn(){
-    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=560,left=500,top=250`;
+    var ancho = 600;
+    var alto = 560;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
     open("log_in.php", "ingreso", params);
 }
 
 function callPassword(){
-    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=660,left=500,top=200`;
+    var ancho = 600;
+    var alto = 660;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
     open("password/password.php", "password", params);
 }
 
 function callRegestry(){
-    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=900,left=500,top=100`;
+    var ancho = 600;
+    var alto = 900;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
     open("regestry/regestry.php", "regestry", params);
 }
 
-function callAbout(){
-    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=350,left=500,top=250`;
+function callAbout(){var ancho = 600;
+    var ancho = 600;
+    var alto = 350;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
     open("about.php", "about", params);
 }

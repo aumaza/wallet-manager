@@ -42,7 +42,7 @@ class Empresas{
 
 
                 echo "<thead>
-                                <th class='text-nowrap text-center'><span class='Empresa'>Razón Social</span></th>
+                                <th class='text-nowrap text-center'><span class='label label-default'>Razón Social</span></th>
                                 <th class='text-nowrap text-center'><span class='label label-warning'>Acciones</span></th>
                             </thead>";
 
@@ -52,7 +52,7 @@ class Empresas{
                         echo "<tr>";
                         echo "<td align=center>".$nEmpresa->getDescripcion($fila['descripcion'])."</td>";
                         echo '<td class="text-nowrap" align=center>
-                                        <button type="button" class="btn btn-warning btn-block" value="'.$fila['id'].'"  onclick="callEditEmpresa(this.value);">
+                                        <button type="button" class="btn btn-warning" value="'.$fila['id'].'"  onclick="callEditEmpresa(this.value);">
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</button>
                                     </td>';
                                 $count++;

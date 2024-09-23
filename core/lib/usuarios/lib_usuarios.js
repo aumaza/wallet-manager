@@ -207,9 +207,11 @@ $(document).ready(function(){
 
  // CALLERS
  function callEditEstado(id){
-    console.log(id);
-    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=500,left=550,top=250`;
-
+    var ancho = 600;
+    var alto = 500;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
     open("../lib/usuarios/form_editar_usuario_estado.php?id="+id+"", "edit_estado_usuario", params);
 
 }

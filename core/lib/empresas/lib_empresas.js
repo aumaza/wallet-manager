@@ -140,7 +140,11 @@ $(document).ready(function(){
 
   // CALLERS
  function callNewEmpresa(){
-    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=350,left=550,top=250`;
-    open("../lib/empresas/form_new_empresa.php", "new_empresa", params);
+    var ancho = 600;
+    var alto = 350;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
+    window.open("../lib/empresas/form_new_empresa.php", "new_empresa", params);
 
 }
