@@ -5,12 +5,9 @@
 
 
 
-      include "../../connection/connection.php";
-      include "../lib/lib_system.php";
-      include "lib_main.php";
-      include "../lib/usuarios/lib_usuarios.php";
-      include "../lib/empresas/lib_empresas.php";
-      include "../lib/servicios/lib_servicios.php";
+      include "../../../connection/connection.php";
+      include "../lib_system.php";
+      include "lib_servicios.php";
 
 
       $varsession = $_SESSION['user'];
@@ -55,63 +52,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>Wallet Manager - Menú Principal</title>
+  <title>Wallet Manager - Agregar Servicio</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php skeleton(); ?>
 </head>
-
-
-<body style="background-color: #4169E1;" onload="lock();">
-
-<?php mainNavBar($nombre,$avatar); ?>
-
+<body style="background-color: #4169E1;">
   
-<div class="container-fluid">
+<div class="container"><br>
  
   <?php
 
     if($conn){
        
-        // MODALES
-        modalAbout();
-        modalDocumentation();
-
-        // SALIR DEL SISTEMA
-        if(isset($_POST['exit'])){
-          logOut($nombre);
-        }
-
-        // HOME
-        if(isset($_POST['home'])){
-          home($nombre);
-        }
-
-        // USUARIOS
-        // creamos el objeto
-        $nUsuario = new Usuarios();
-
-        if(isset($_POST['usuarios'])){
-            $nUsuario->listUsuarios($nUsuario,$conn,$dbname);
-        }
-        if(isset($_POST['user_bio'])){
-            $nUsuario->userBio($nUsuario,$user_id,$conn,$dbname);
-        }
-
-        // EMPRESAS
-        // creamos el objeto
-        $nEmpresa = new Empresas();
-
-        if(isset($_POST['empresas'])){
-            $nEmpresa->listEmpresas($nEmpresa,$conn,$dbname);
-        }
-
-        // SERVICIOS
-        // creamos el objeto
+        // se crea el objeto usuario
         $nServicio = new Servicios();
-        if(isset($_POST['servicios'])){
-            $nServicio->listServicios($nServicio,$conn,$dbname);
-        }
+        $nServicio->formNewServicio();
 
     }else{
       flyerConnFailure();
@@ -123,9 +79,7 @@
 
 </div>
 
-<script type="text/javascript" src="main.js"></script>
-<script type="text/javascript" src="../lib/usuarios/lib_usuarios.js"></script>
-<script type="text/javascript" src="../lib/empresas/lib_empresas.js"></script>
-<script type="text/javascript" src="../lib/servicios/lib_servicios.js"></script>
+
+<script type="text/javascript" src="lib_servicios.js"></script>
 </body>
 </html>

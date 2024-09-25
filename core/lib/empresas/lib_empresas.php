@@ -101,6 +101,38 @@ class Empresas{
 
     } // END OF FUNCTION
 
+    public function formEditEmpresa($nEmpresa,$id,$conn,$dbanme){
+
+        mysqli_select_db($conn,$dbname);
+        $sql = "select * from wm_empresas where id = '$id'";
+        $query = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_assoc($query);
+
+        echo '<div class="container">
+                        <div class="jumbotron">
+                        <h2><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar Empresa</h2><hr>
+
+                        <form id="fr_update_empresa_ajax" method="POST">
+
+                            <input type="hidden" id="id" name="id" value="'.$id.'">
+
+                            <div class="form-group">
+                            <label for="descripcion">Nombre / Razón Social:</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" value="'.$nEmpresa->getDescripcion($row['descripcion']).'">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="update_empresa">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Actualizar</button>
+
+                        </form>
+
+                        <div id="messageUpdateEmpresa"></div>
+
+                        </div>
+                        </div>';
+
+    } // END OF FUNCTION
+
     // PERSISTENCIA
     public function addEmpresa($nEmpresa,$descripcion,$conn,$dbname){
 
@@ -123,6 +155,35 @@ class Empresas{
                 echo 1; // registro guardado correctamente
             }else{
                 $error = 'Hubo in error al intentar guardar registro en la tabla Empresas: '.mysqli_error($conn);
+                $nEmpresa->errorMysqlEmpresas($error);
+                echo -1; // hubo un problema al intentar guardar el registro
+            }
+
+        }
+        if($rows > 0){
+            echo 9; // registro existente
+        }
+
+    } // END OF FUNCTION
+
+    public function updateEmpresa($nEmpresa,$id,$descripcion,$conn,$dbname){
+
+        mysqli_select_db($conn,$dbname);
+        $sql = "select * from wm_empresas where descripcion = $nEmpresa->getDescripcion('$descripcion')";
+        $query = mysqli_query($conn,$sql);
+        $rows = mysqli_num_rows($query);
+
+        if($rows <= 0){
+
+            $sql_1 = "update wm_empresas set descripcion = $nEmpresa->setDescripcion('$descripcion') where id = '$id'";
+            $query_1 = mysqli_query($conn,$sql_1);
+
+            if($query_1){
+                $success = 'Se ha actualizado registro con id: '.$id.' en tabla Empresas exitosamente!';
+                $nEmpresa->successMysqlEmpresas($success);
+                echo 1; // registro guardado correctamente
+            }else{
+                $error = 'Hubo in error al intentar actualizar registro en la tabla Empresas: '.mysqli_error($conn);
                 $nEmpresa->errorMysqlEmpresas($error);
                 echo -1; // hubo un problema al intentar guardar el registro
             }
