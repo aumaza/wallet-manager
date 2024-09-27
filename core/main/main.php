@@ -11,6 +11,7 @@
       include "../lib/usuarios/lib_usuarios.php";
       include "../lib/empresas/lib_empresas.php";
       include "../lib/servicios/lib_servicios.php";
+      include "../lib/pagos/lib_pagos.php";
 
 
       $varsession = $_SESSION['user'];
@@ -113,6 +114,13 @@
             $nServicio->listServicios($nServicio,$conn,$dbname);
         }
 
+        // PAGOS
+        // creamos el objeto
+        $nPago = new Pagos();
+        if(isset($_POST['pagos'])){
+            $nPago->listPagos($nPago,$conn,$dbname);
+        }
+
     }else{
       flyerConnFailure();
     }
@@ -127,5 +135,6 @@
 <script type="text/javascript" src="../lib/usuarios/lib_usuarios.js"></script>
 <script type="text/javascript" src="../lib/empresas/lib_empresas.js"></script>
 <script type="text/javascript" src="../lib/servicios/lib_servicios.js"></script>
+<script type="text/javascript" src="../lib/pagos/lib_pagos.js"></script>
 </body>
 </html>
