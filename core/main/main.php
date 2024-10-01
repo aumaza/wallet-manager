@@ -118,7 +118,7 @@
         // creamos el objeto
         $nPago = new Pagos();
         if(isset($_POST['pagos'])){
-            $nPago->listPagos($nPago,$conn,$dbname);
+            $nPago->listPagos($nPago,$user_id,$conn,$dbname);
         }
 
     }else{

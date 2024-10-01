@@ -112,8 +112,8 @@ $(document).ready(function(){
                     var mensaje = '<br><div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registro Agregado Exitosamente</p></div>';
                      document.getElementById('messageNewPago').innerHTML = mensaje;
                      console.log(values);
-                     $('#empresa_id').val('');
-                     $('#servicio_id').val('');
+                     $('#id_empresa').val('');
+                     $('#id_servicio').val('');
                      $('#fecha_vencimiento').val('');
                      $('#fecha_pago_realizado').val('');
                      $('#monto_pagar').val('');
@@ -178,7 +178,7 @@ $(document).ready(function(){
  // CALLERS
  function callNewPago(){
     var ancho = 800;
-    var alto = 800;
+    var alto = 950;
     var left = (screen.width / 2) - (ancho / 2);
     var top = (screen.height / 2) - (alto / 2);
     let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;

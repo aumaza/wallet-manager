@@ -26,7 +26,7 @@
                                             ($monto_pagado == '')){
                                             echo 5; // hay campos sin completar
                 }else{
-                    addPago($nPago,$user_id,$id_empresa,$id_servicio,$fecha_vencimiento,$fecha_pago_realizado,$monto_pagar,$monto_pagado,$my_file,$conn,$dbname);
+                    $nPago->addPago($nPago,$user_id,$id_empresa,$id_servicio,$fecha_vencimiento,$fecha_pago_realizado,$monto_pagar,$monto_pagado,$my_file,$conn,$dbname);
                 }
             }else{
                 echo 7; // sin conexion

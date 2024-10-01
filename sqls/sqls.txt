@@ -39,9 +39,14 @@ file_path varchar(500)
 
 # QUERIES
 select * from wm_usuarios;
+select * from wm_pagos;
 show tables;
 show columns from wm_usuarios;
 show columns from wm_empresas;
 show columns from wm_servicios;
 show columns from wm_pagos;
+
+select (select name from wm_usuarios where id = wm_pagos.id_usuario) as usuario, (select descripcion from wm_empresas where id = wm_pagos.id_empresa ) as empresa, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio, fecha_vencimiento, fecha_pago_realizado, monto_pagar, monto_pagado, comprobante_pago, file_path from wm_pagos;
+
+select (select name from wm_usuarios where id = wm_pagos.id_usuario) as usuario, (select descripcion from wm_empresas where id = wm_pagos.id_empresa ) as empresa, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio, fecha_vencimiento, fecha_pago_realizado, monto_pagar, monto_pagado, comprobante_pago, file_path from wm_pagos where id_usuario = 1;
 

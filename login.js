@@ -90,7 +90,7 @@ $(document).ready(function(){
 
 function callLogIn(){
     var ancho = 600;
-    var alto = 560;
+    var alto = 650;
     var left = (screen.width / 2) - (ancho / 2);
     var top = (screen.height / 2) - (alto / 2);
     let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;

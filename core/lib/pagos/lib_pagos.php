@@ -103,13 +103,23 @@ class Pagos{
 
 
     // METODOS
-    public function listPagos($nPago,$conn,$dbname){
+    public function listPagos($nPago,$user_id,$conn,$dbname){
 
         if($conn){
 
-                $sql = "SELECT * FROM wm_pagos";
-                mysqli_select_db($conn,$dbase);
-                $resultado = mysqli_query($conn,$sql);
+                if($user_id == 1){
+
+                    $sql = "select (select name from wm_usuarios where id = wm_pagos.id_usuario) as usuario, (select descripcion from wm_empresas where id = wm_pagos.id_empresa ) as empresa, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio, fecha_vencimiento, fecha_pago_realizado, monto_pagar, monto_pagado, comprobante_pago, file_path from wm_pagos";
+                    mysqli_select_db($conn,$dbase);
+                    $resultado = mysqli_query($conn,$sql);
+                }
+
+                if($user_id != 1){
+
+                    $sql = "select (select name from wm_usuarios where id = wm_pagos.id_usuario) as usuario, (select descripcion from wm_empresas where id = wm_pagos.id_empresa ) as empresa, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio, fecha_vencimiento, fecha_pago_realizado, monto_pagar, monto_pagado, comprobante_pago, file_path from wm_pagos where id_usuario = '$user_id'";
+                    mysqli_select_db($conn,$dbase);
+                    $resultado = mysqli_query($conn,$sql);
+                }
 
                 //mostramos fila x fila
                 $count = 0;
@@ -143,12 +153,21 @@ class Pagos{
                         echo "<td align=center>".$nPago->getIdServicio($fila['servicio'])."</td>";
                         echo "<td align=center>".$nPago->getFechaVencimiento($fila['fecha_vencimiento'])."</td>";
                         echo "<td align=center>".$nPago->getFechaPago($fila['fecha_pago_realizado'])."</td>";
-                        echo "<td align=center>".$nPago->getMontoPagar($fila['monto_pagar'])."</td>";
-                        echo "<td align=center>".$nPago->getMontoPagado($fila['monto_pagado'])."</td>";
+                        echo "<td align=center>$".$nPago->getMontoPagar($fila['monto_pagar'])."</td>";
+                        echo "<td align=center>$".$nPago->getMontoPagado($fila['monto_pagado'])."</td>";
                         echo '<td class="text-nowrap" align=center>
                                         <button type="button" class="btn btn-warning" value="'.$fila['id'].'"  onclick="callEditPago(this.value);">
-                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</button>
-                                    </td>';
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</button>';
+
+                                        if($nPago->getComprobantePago($fila['comprobante_pago']) == ''){
+                                            echo '<button type="button" class="btn btn-primary" value="'.$fila['id'].'"  onclick="callCargarComprobante(this.value);">
+                                                <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Subir Comprobante</button>';
+                                        }
+                                        if($nPago->getComprobantePago($fila['comprobante_pago']) != ''){
+                                            echo '<button type="button" class="btn btn-info" value="'.$fila['id'].'"  onclick="callViewComprobante(this.value);">
+                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Comprobante</button>';
+                                        }
+                        echo '</td>';
                                 $count++;
                     }
 
@@ -260,21 +279,104 @@ public function formNewPago($user_id,$conn,$dbname){
 } // END OF FUNCTION
 
 
+public function formEditPago($nPago,$id,$conn,$dbname){
+
+    mysqli_select_db($conn,$dbname);
+    $sql = "select * from wm_pagos where id = '$id'";
+    $query = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($query);
+
+    echo '<div class="container">
+                    <div class="jumbotron">
+                    <h2><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar Pago</h2><hr>
+
+                    <form id="fr_update_pago_ajax" method="POST">
+
+                        <input type="hidden" id="user_id" name="user_id" value="'.$nPago->getIdUsuario($row['id_usuario']).'">
+
+                        <div class="form-group">
+				                <label for="id_empresa"><span class="badge">Empresas</span></label>
+				                <select class="form-control" id="id_empresa" name="id_empresa">
+				                <option value="" disabled selected>Seleccionar</option>';
+
+
+				                    $query = "SELECT id, descripcion FROM wm_empresas order by descripcion ASC";
+				                    mysqli_select_db($conn,$db_basename);
+				                    $res = mysqli_query($conn,$query);
+
+				                    if($res){
+				                        while ($valores = mysqli_fetch_array($res)){
+				                        	echo '<option value="'.$valores['id'].'">'.$valores['descripcion'].'</option>';
+				                        }
+				                    }
+
+
+						      	echo '</select>
+						        </div>
+
+                        <div class="form-group">
+				                <label for="id_servicio"><span class="badge">Servicios</span></label>
+				                <select class="form-control" id="id_servicio" name="id_servicio">
+				                <option value="" disabled selected>Seleccionar</option>';
+
+
+				                    $query = "SELECT id, descripcion FROM wm_servicios order by descripcion ASC";
+				                    mysqli_select_db($conn,$db_basename);
+				                    $res = mysqli_query($conn,$query);
+
+				                    if($res){
+				                        while ($valores = mysqli_fetch_array($res)){
+				                        	echo '<option value="'.$valores['id'].'">'.$valores['descripcion'].'</option>';
+				                        }
+				                    }
+
+				                    mysqli_close($conn);
+
+						      	echo '</select>
+						        </div>
+
+                        <div class="form-group">
+                        <label for="fecha_vencimiento"><span class="badge"> Fecha Vencimiento </span></label>
+                        <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento">
+                        </div>
+
+                        <div class="form-group">
+                        <label for="fecha_pago_realizado"><span class="badge"> Fecha Pago Realizado </span></label>
+                        <input type="date" class="form-control" id="fecha_pago_realizado" name="fecha_pago_realizado">
+                        </div>
+
+                        <div class="form-group">
+                        <label for="monto_pagar"><span class="badge"> Monto a Pagar </span></label>
+                        <input type="text" class="form-control" id="monto_pagar" name="monto_pagar" placeholder="$">
+                        </div>
+
+                        <div class="form-group">
+                        <label for="monto_pagado"><span class="badge"> Monto Pagado </span></label>
+                        <input type="text" class="form-control" id="monto_pagado" name="monto_pagado" placeholder="$">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="update_pago">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Aceptar</button>
+                    </form><hr>
+
+                    <div id="messageUpdatePago" ></div>
+
+                    </div>
+                    </div>';
+
+} // END OF FUNCTION
+
+
 // PERSISTENCIA
 
 public function addPago($nPago,$user_id,$id_empresa,$id_servicio,$fecha_vencimiento,$fecha_pago_realizado,$monto_pagar,$monto_pagado,$my_file,$conn,$dbname){
 
     mysqli_select_db($conn,$dbname);
-    $sql = "select * from wm_pagos
-                    where
-                    id_usuario = $nPago->getIdUsuario('$user_id') and
-                    id_empresa = $nPago->getIdEmpresa('$id_empresa') and
-                    id_servicio = $nPago->getIdServicio('$id_servicio') and
-                    fecha_vencimiento = $nPago->getFechaVencimiento('$fecha_vencimiento')";
+    $sql = "select * from wm_pagos where id_usuario = $nPago->getIdUsuario('$user_id') and id_empresa = $nPago->getIdEmpresa('$id_empresa') and id_servicio = $nPago->getIdServicio('$id_servicio') and fecha_vencimiento = $nPago->getFechaVencimiento('$fecha_vencimiento')";
     $query = mysqli_query($conn,$sql);
     $rows = mysqli_num_rows($query);
 
-    if($rows <= 0){
+    if($rows == 0){
 
     if($my_file != ''){
 
@@ -325,7 +427,7 @@ public function addPago($nPago,$user_id,$id_empresa,$id_servicio,$fecha_vencimie
 									            }else{
                                                         $error = "Ocurrió un problema al intentar guardar registro en wm_pagos:  ".mysqli_error($conn);
                                                         $nPagos->errorMysqlPagos($error);
-                                                        echo 2; // solo se subio el archivo
+                                                        echo -1; // solo se subio el archivo
                                                 }
 									            }else{
                                                         echo 3; // verificar permisos del directorio
