@@ -71,7 +71,7 @@
     });
 });
 
-// GUARDAR SERVICIO
+// GUARDAR PAGO
 $(document).ready(function(){
     $('#add_pago').click(function(){
 
@@ -174,6 +174,75 @@ $(document).ready(function(){
     });
 });
 
+// ACTUALIZAR PAGO
+$(document).ready(function(){
+    $('#update_pago').click(function(){
+
+        const form = document.querySelector('#fr_update_pago_ajax');
+
+        const id_empresa = document.querySelector('#id_empresa');
+        const id_servicio = document.querySelector('#id_servicio');
+        const fecha_vencimiento = document.querySelector('#fecha_vencimiento');
+        const fecha_pago_realizado = document.querySelector('#fecha_pago_realizado');
+        const monto_pagar = document.querySelector('#monto_pagar');
+        const monto_pagado = document.querySelector('#monto_pagado');
+
+        const formData = new FormData(form);
+        const values = [...formData.entries()];
+        console.log(values);
+
+        formData.append('id_empresa', id_empresa.value);
+        formData.append('id_servicio', id_servicio.value);
+        formData.append('fecha_vencimiento', fecha_vencimiento.value);
+        formData.append('fecha_pago_realizado', fecha_pago_realizado.value);
+        formData.append('monto_pagar', monto_pagar.value);
+        formData.append('monto_pagado', monto_pagado.value);
+
+         jQuery.ajax({
+            type:"POST",
+            method:"POST",
+            url:"update_pago.php",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success:function(r){
+                if(r == 1){
+                    var mensaje = '<br><div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registro Actualizado Exitosamente</p></div>';
+                     document.getElementById('messageUpdatePago').innerHTML = mensaje;
+                     console.log(values);
+                     setTimeout(function() { window.opener.location.reload(); }, 2000);
+                     setTimeout(function() { $(".close").click(); }, 3000);
+                     setTimeout(function() { window.close(); }, 4000);
+
+                     }else if(r == -1){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Ocurrió un problema al intentar actualizar el registro</p></div>';
+                        document.getElementById('messageUpdatePago').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+
+                     }else if(r == 5){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Hay campos sin completar</p></div>';
+                        document.getElementById('messageUpdatePago').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }else if(r == 7){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Sin conexion a la base de datos</p></div>';
+                        document.getElementById('messageUpdatePago').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }
+
+                    else if(r == ''){
+                        //console.log(formData);
+                    }
+            },
+
+        });
+
+        return false;
+    });
+});
 
  // CALLERS
  function callNewPago(){
@@ -194,6 +263,6 @@ function callEditPago(id){
     var left = (screen.width / 2) - (ancho / 2);
     var top = (screen.height / 2) - (alto / 2);
     let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
-    window.open("../lib/pagos/form_update_pago.php?id="+id+"", "edit_pago", params);
+    window.open("../lib/pagos/form_edit_pago.php?id="+id+"", "edit_pago", params);
 
 }
