@@ -244,6 +244,78 @@ $(document).ready(function(){
     });
 });
 
+
+// SUBIR COMPROBANTE
+$(document).ready(function(){
+    $('#upload_comprobante').click(function(){
+
+        const form = document.querySelector('#fr_upload_comprobante_ajax');
+        const id = document.querySelector('#id');
+        const my_file = document.querySelector('#my_file');
+
+        const formData = new FormData(form);
+        const values = [...formData.entries()];
+        console.log(values);
+
+        formData.append('id', id.value);
+        formData.append('my_file', my_file.value[0]);
+
+         jQuery.ajax({
+            type:"POST",
+            method:"POST",
+            url:"upload_comprobante.php",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success:function(r){
+                if(r == 1){
+                    var mensaje = '<br><div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Comprobante guardado y registro actualizado exitosamente</p></div>';
+                     document.getElementById('messageUploadComprobante').innerHTML = mensaje;
+                     console.log(values);
+                     setTimeout(function() { window.opener.location.reload(); }, 2000);
+                     setTimeout(function() { $(".close").click(); }, 3000);
+                     setTimeout(function() { window.close(); }, 4000);
+
+                     }else if(r == -1){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Ocurrió un problema al intentar actualizar el registro</p></div>';
+                        document.getElementById('messageUploadComprobante').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+
+                     }else if(r == 5){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> No has seleccionado un archivo</p></div>';
+                        document.getElementById('messageUploadComprobante').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }else if(r == 7){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Sin conexion a la base de datos</p></div>';
+                        document.getElementById('messageUploadComprobante').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }else if(r == 3){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Verifique los permisos del directorio!</p></div>';
+                        document.getElementById('messageUploadComprobante').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }else if(r == 4){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Sólo se permiten archivos PDF</p></div>';
+                        document.getElementById('messageUploadComprobante').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }
+
+                    else if(r == ''){
+                        //console.log(formData);
+                    }
+            },
+
+        });
+
+        return false;
+    });
+});
+
  // CALLERS
  function callNewPago(){
     var ancho = 800;
@@ -264,5 +336,17 @@ function callEditPago(id){
     var top = (screen.height / 2) - (alto / 2);
     let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
     window.open("../lib/pagos/form_edit_pago.php?id="+id+"", "edit_pago", params);
+
+}
+
+
+function callUploadComprobante(id){
+    console.log(id);
+    var ancho = 800;
+    var alto = 450;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
+    window.open("../lib/pagos/form_upload_comprobante.php?id="+id+"", "upload_comprobante", params);
 
 }

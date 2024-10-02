@@ -160,11 +160,11 @@ class Pagos{
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</button>';
 
                                         if($nPago->getComprobantePago($fila['comprobante_pago']) == ''){
-                                            echo '<button type="button" class="btn btn-primary" value="'.$fila['id'].'"  onclick="callCargarComprobante(this.value);">
+                                            echo '<button type="button" class="btn btn-primary" value="'.$fila['id'].'"  onclick="callUploadComprobante(this.value);">
                                                 <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Subir Comprobante</button>';
                                         }
                                         if($nPago->getComprobantePago($fila['comprobante_pago']) != ''){
-                                            echo '<button type="button" class="btn btn-info" value="'.$fila['id'].'"  onclick="callViewComprobante(this.value);">
+                                            echo '<a href="../lib/pagos/view_comprobante.php?id='.$fila['id'].'"><button type="button" class="btn btn-info" target="_blank">
                                                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Comprobante</button>';
                                         }
                         echo '</td>';
@@ -367,6 +367,32 @@ public function formEditPago($nPago,$id,$conn,$dbname){
 } // END OF FUNCTION
 
 
+public function formUploadComprobante($id,$conn,$dbname){
+
+    echo '<div class="container">
+                    <div class="jumbotron">
+                    <h2><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Subir Comprobante</h2><hr>
+
+                    <form id="fr_upload_comprobante_ajax" method="POST">
+
+                        <input type="hidden" id="id" name="id" value="'.$id.'">
+
+                        <div class="form-group">
+                        <label for="file"><span class="badge"> Comprobante Pago </span></label>
+                        <input type="file" class="form-control" id="my_file" name="my_file">
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-block" id="upload_comprobante">
+                            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Subir</button>
+                    </form><hr>
+
+                    <div id="messageUploadComprobante" ></div>
+
+                    </div>
+                    </div>';
+
+} // END OF FUNCTION
+
 // PERSISTENCIA
 
 public function addPago($nPago,$user_id,$id_empresa,$id_servicio,$fecha_vencimiento,$fecha_pago_realizado,$monto_pagar,$monto_pagado,$my_file,$conn,$dbname){
@@ -491,6 +517,49 @@ public function updatePago($nPago,$id,$id_empresa,$id_servicio,$fecha_vencimient
             $nPagos->errorMysqlPagos($error);
             echo -1; // hubo un error al intentar alctualizar
         }
+} // END OF FUNCTION
+
+public function uploadComprobante($nPago,$id,$my_file,$conn,$dbname){
+
+
+                    			$targetDir = '../../comprobantes/';
+								$fileName = $my_file;
+								$targetFilePath = $targetDir . $fileName;
+
+								$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+									   // Allow certain file formats
+									    $allowTypes = array('pdf');
+
+									    if(in_array($fileType, $allowTypes)){
+
+									       // Upload file to server
+									        if(move_uploaded_file($_FILES["my_file"]["tmp_name"], $targetFilePath)){
+
+
+									        $sql_1 = "update wm_pagos set comprobante_pago = $nPago->setComprobantePago('$fileName'), file_path = $nPago->setFilePath('$targetFilePath') where id = '$id'";
+
+									        mysqli_select_db($conn,$dbname);
+									        $query_1 = mysqli_query($conn,$sql_1);
+
+
+									            if($query_1){
+                                                        $success = 'Se ha guardado exitosamente registro en tabla wm_pagos';
+                                                        $nPago->successMysqlPagos($success);
+                                                        echo 1; // sea actualizo la base  y subio bien el archivo
+									            }else{
+                                                        $error = "Ocurrió un problema al intentar guardar registro en wm_pagos:  ".mysqli_error($conn);
+                                                        $nPagos->errorMysqlPagos($error);
+                                                        echo -1; // solo se subio el archivo
+                                                }
+									            }else{
+                                                        echo 3; // verificar permisos del directorio
+                                                }
+									            }else{
+                                                        echo 4; // solo archivos pdf
+									            }
+
+
 } // END OF FUNCTION
 
 // MENEJO DE  ACTUALIZACION EXITOSA
