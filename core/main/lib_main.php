@@ -8,50 +8,46 @@ function mainNavBar($nombre,$avatar){
 			    <div class="navbar-header">
 			    <form action="#" method="POST">
 			      <button class="btn btn-default btn-sm navbar-btn" type="submit" name="home">
-                    <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Wallet Manager</button>
+                    <img src="../img/icons/status/wallet-open.png"  class="img-reponsive img-rounded" alt="img" /> Wallet Manager</button>
 			    </form>
 			    </div>
 
 			    <ul class="nav navbar-nav">
 			      
 			      <button type="button" class="btn btn-default btn-sm navbar-btn" data-toggle="modal" data-target="#myModalAbout">
-			      	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> A cerca de..</button>
+			      	<img src="../img/icons/status/dialog-information.png"  class="img-reponsive img-rounded" alt="img" /> A cerca de..</button>
 			      
 			      <button type="button" class="btn btn-default btn-sm navbar-btn" data-toggle="modal" data-target="#myModalDocumentation">
-			      	<span class="glyphicon glyphicon-book" aria-hidden="true"></span> Documentación</button>
+			      	<img src="../img/icons/actions/help-contents.png"  class="img-reponsive img-rounded" alt="img" /> Documentación</button>
 			    </ul>
 			    
 			    <ul class="nav navbar-nav navbar-right">
 			      
-			      <div class="dropdown">';
+			      <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-            toggle="tooltip" title="Menú"><img src="../img/icons/places/user-identity.png"  class="img-reponsive img-rounded" alt="img" /> '.$nombre.'</button>
 
-                    if($avatar != 'null'){
-                        echo '<button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-            toggle="tooltip" title="Menú"><img src="'.$avatar.'" alt="" class="avatar" /> '.$nombre.'</button>';
-                    }else{
-                        echo '<button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-            toggle="tooltip" title="Menú"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> '.$nombre.'</button>';
-                    }
-				    echo '<ul class="dropdown-menu">
+                <ul class="dropdown-menu">
 				    <form action="#" method="POST">
 				      <li class="dropdown-header">Menú del Usuario</li>
 				      <li><button type="submit" name="user_bio" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Mis Datos</button></li>
+				      	<img src="../img/icons/actions/view-process-own.png"  class="img-reponsive img-rounded" alt="img" /> Mis Datos</button></li>
 				      
 				      <li><button type="submit" name="empresas" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Empresas</button></li>
+				      	<img src="../img/icons/categories/applications-engineering.png"  class="img-reponsive img-rounded" alt="img" /> Empresas</button></li>
 
 				      	<li><button type="submit" name="servicios" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Servicios</button></li>
+				      	<img src="../img/icons/actions/view-barcode.png"  class="img-reponsive img-rounded" alt="img" /> Servicios</button></li>
 
 				      	<li><button type="submit" name="pagos" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Pagos</button></li>
+				      	<img src="../img/icons/actions/view-loan.png"  class="img-reponsive img-rounded" alt="img" /> Pagos</button></li>
 				      
 				      <li class="divider"></li>
 				      <li class="dropdown-header">Menú del sistema</li>
 				      <li><button type="submit" name="usuarios" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</button></li>
+				      	<img src="../img/icons/apps/system-users.png"  class="img-reponsive img-rounded" alt="img" /> Usuarios</button></li>
 				      
 				      <li><button class="btn btn-danger btn-sm btn-block" type="submit" name="exit">
-				      	<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</button></li>
+				      	<img src="../img/icons/actions/system-shutdown.png"  class="img-reponsive img-rounded" alt="img" /> Salir</button></li>
 				     </form>
 				    </ul>
 				  </div>

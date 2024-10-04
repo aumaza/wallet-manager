@@ -350,3 +350,14 @@ function callUploadComprobante(id){
     window.open("../lib/pagos/form_upload_comprobante.php?id="+id+"", "upload_comprobante", params);
 
 }
+
+function callWhatsapp(){
+
+    var ancho = 800;
+    var alto = 450;
+    var left = (screen.width / 2) - (ancho / 2);
+    var top = (screen.height / 2) - (alto / 2);
+    let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
+    window.open("https://web.whatsapp.com/send?phone=+5491161669201", "whatsapp", params);
+
+}

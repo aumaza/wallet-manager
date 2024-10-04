@@ -125,7 +125,7 @@ class Pagos{
                 $count = 0;
                 echo '<div class="container-fluid">
                             <div class="jumbotron">
-                            <h2><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Pagos [ Listado ]</h2><hr>
+                            <h2><img src="../img/icons/actions/view-loan.png"  class="img-reponsive img-rounded" alt="img" /> Pagos [ Listado ]</h2><hr>
                             <button type="button" class="btn btn-primary" id="new_pago" onclick="callNewPago();">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Pago</button><hr>';
 
@@ -165,8 +165,12 @@ class Pagos{
                                         }
                                         if($nPago->getComprobantePago($fila['comprobante_pago']) != ''){
                                             echo '<a href="../lib/pagos/view_comprobante.php?id='.$fila['id'].'"><button type="button" class="btn btn-info" target="_blank">
-                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Comprobante</button>';
+                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Comprobante</button></a>';
                                         }
+
+                        echo '<button type="button" class="btn btn-default" onclick="callWhatsapp();" target="_blank">
+                                            <img src="../img/whatsappx22.png"  class="img-reponsive img-rounded"> Whatsapp</button>';
+
                         echo '</td>';
                                 $count++;
                     }

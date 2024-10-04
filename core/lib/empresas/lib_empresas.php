@@ -33,7 +33,8 @@ class Empresas{
                 $count = 0;
                 echo '<div class="container-fluid">
                             <div class="jumbotron">
-                            <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Empresas [ Listado ]</h2><hr>
+                            <h2>
+                            <img src="../img/icons/categories/applications-engineering.png"  class="img-reponsive img-rounded" alt="img" /> Empresas [ Listado ]</h2><hr>
                             <button type="button" class="btn btn-primary" id="new_empresa" onclick="callNewEmpresa();">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Empresa</button><hr>';
 

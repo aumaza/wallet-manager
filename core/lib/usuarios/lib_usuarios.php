@@ -100,7 +100,7 @@ class Usuarios{
                 $count = 0;
                 echo '<div class="container-fluid">
                             <div class="jumbotron">
-                            <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios [ Listado ]</h2><hr>';
+                            <h2><img src="../img/icons/apps/system-users.png"  class="img-reponsive img-rounded" alt="img" /> Usuarios [ Listado ]</h2><hr>';
 
 
                 echo "<table class='display compact' style='width:100%' id='usuariosTable'>";
@@ -206,7 +206,7 @@ class Usuarios{
         echo '<div class="container">
                         <div class="jumbotron">
                         <div class="alert alert-info">
-                        <h2><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Mis Datos</h2>
+                        <h2><img src="../img/icons/actions/view-process-own.png"  class="img-reponsive img-rounded" alt="img" /> Mis Datos</h2>
                         </div>
 
                         <form id="fr_mis_datos_ajax" method="POST">
