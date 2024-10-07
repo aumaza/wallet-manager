@@ -40,14 +40,17 @@ function mainNavBar($nombre,$avatar){
 
 				      	<li><button type="submit" name="pagos" class="btn btn-default btn-sm btn-block">
 				      	<img src="../img/icons/actions/view-loan.png"  class="img-reponsive img-rounded" alt="img" /> Pagos</button></li>
-				      
+
 				      <li class="divider"></li>
-				      <li class="dropdown-header">Menú del sistema</li>
-				      <li><button type="submit" name="usuarios" class="btn btn-default btn-sm btn-block">
-				      	<img src="../img/icons/apps/system-users.png"  class="img-reponsive img-rounded" alt="img" /> Usuarios</button></li>
-				      
-				      <li><button class="btn btn-danger btn-sm btn-block" type="submit" name="exit">
-				      	<img src="../img/icons/actions/system-shutdown.png"  class="img-reponsive img-rounded" alt="img" /> Salir</button></li>
+				      <li class="dropdown-header">Menú del sistema</li>';
+
+                        if($nombre == 'Administrador'){
+                            echo '<li><button type="submit" name="usuarios" class="btn btn-default btn-sm btn-block">
+                                                <img src="../img/icons/apps/system-users.png"  class="img-reponsive img-rounded" alt="img" /> Usuarios</button></li>';
+                        }
+                            echo '<li><button class="btn btn-danger btn-sm btn-block" type="submit" name="exit">
+                                                <img src="../img/icons/actions/system-shutdown.png"  class="img-reponsive img-rounded" alt="img" /> Salir</button></li>
+
 				     </form>
 				    </ul>
 				  </div>
