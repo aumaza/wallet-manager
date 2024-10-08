@@ -9,7 +9,22 @@
         "paging":         true,
         "deferRender": true,
         "dom":  "Bfrtip",
-        buttons: [
+        "fixedColumns": true,
+        "language": {
+        "lengthMenu": [10, 25, 50, 75, 100],
+        "info": "Mostrando pagina _PAGE_ de _PAGES_",
+        "infoEmpty": "No hay registros disponibles",
+        "infoFiltered": "(filtrada de _MAX_ registros)",
+        "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords":    "No se encontraron registros coincidentes",
+        "paginate": {
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      },
+      buttons: [
             {
                 extend: 'excel',
                 text: 'Export Excel',
@@ -53,21 +68,7 @@
             targets: -1,
             visible: true
         } ],
-        "fixedColumns": true,
-      "language":{
-        "lengthMenu": "Mostrar _MENU_ registros por pagina",
-        "info": "Mostrando pagina _PAGE_ de _PAGES_",
-        "infoEmpty": "No hay registros disponibles",
-        "infoFiltered": "(filtrada de _MAX_ registros)",
-        "loadingRecords": "Cargando...",
-        "processing":     "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords":    "No se encontraron registros coincidentes",
-        "paginate": {
-          "next":       "Siguiente",
-          "previous":   "Anterior"
-        },
-      }
+
     });
 });
 
