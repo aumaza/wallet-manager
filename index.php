@@ -1,12 +1,13 @@
-<?php 	session_start();
+<?php    session_start();
+                include "connection/connection.php";
+                include "core/lib/lib_system.php";
 
-      	error_reporting(E_ALL ^ E_NOTICE);
-      	ini_set('display_errors', 1);
+                error_reporting(E_ALL ^ E_NOTICE);
+                ini_set('display_errors', 1);
 
-		include "connection/connection.php";
-		include "core/lib/lib_system.php";
+            //$php_version = phpversion();
 
-        $varsession = $_SESSION['user'];
+       $varsession = $_SESSION['user'];
 
       if($conn){
 
@@ -22,6 +23,8 @@
       }else{
         echo 'CONNECTION FAILURE';
       }
+
+
 
 
 

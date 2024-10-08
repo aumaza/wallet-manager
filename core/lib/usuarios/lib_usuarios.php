@@ -100,7 +100,12 @@ class Usuarios{
                 $count = 0;
                 echo '<div class="container-fluid">
                             <div class="jumbotron">
-                            <h2><img src="../img/icons/apps/system-users.png"  class="img-reponsive img-rounded" alt="img" /> Usuarios [ Listado ]</h2><hr>';
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <img src="../img/icons/apps/system-users.png"  class="img-reponsive img-rounded" alt="img" /> <strong>Usuarios</strong>
+                                </div>
+                            </div><hr>';
 
 
                 echo "<table class='display compact' style='width:100%' id='usuariosTable'>";

@@ -40,6 +40,8 @@ file_path varchar(500)
 # QUERIES
 select * from wm_usuarios;
 select * from wm_pagos;
+select * from wm_servicios;
+select * from wm_empresas;
 show tables;
 show columns from wm_usuarios;
 show columns from wm_empresas;
@@ -50,3 +52,12 @@ select id_usuario, (select name from wm_usuarios where id = wm_pagos.id_usuario)
 
 select id_usuario, (select name from wm_usuarios where id = wm_pagos.id_usuario) as usuario, (select descripcion from wm_empresas where id = wm_pagos.id_empresa ) as empresa, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio, fecha_vencimiento, fecha_pago_realizado, monto_pagar, monto_pagado, comprobante_pago, file_path from wm_pagos where id_usuario = 1;
 
+select monto_pagar, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio from wm_pagos where  id_servicio in (1,2,3,5,13,16) and fecha_vencimiento between '2024-05-01' and '2024-05-30';
+
+with servicios as (
+select monto_pagar, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio from wm_pagos where  id_servicio in (1,2,3,5,13,16) and fecha_vencimiento between '2024-05-01' and '2024-05-30')
+select monto_pagar, servicio from servicios
+union
+select sum(monto_pagar), 'Total' from servicios;
+
+select sum(monto_pagado) as total from wm_pagos where fecha_pago_realizado between '2023-01-01' and '2023-12-31' and id_servicio = 1 and id_usuario = 4;

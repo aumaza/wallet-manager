@@ -121,6 +121,15 @@
             $nPago->listPagos($nPago,$user_id,$conn,$dbname);
         }
 
+        // MODAL CALCULAR TOTAL MENSUAL
+        $nPago->modalCalcularTotalMensual();
+
+        if(isset($_POST['calcular_total_mensual'])){
+            $fecha_desde = mysqli_real_escape_string($conn,$_POST['fecha_desde']);
+            $fecha_hasta = mysqli_real_escape_string($conn,$_POST['fecha_hasta']);
+            $nPago->formCalcularTotalMensual($nPago,$fecha_desde,$fecha_hasta,$conn,$dbname);
+        }
+
     }else{
       flyerConnFailure();
     }

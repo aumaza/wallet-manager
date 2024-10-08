@@ -125,9 +125,18 @@ class Pagos{
                 $count = 0;
                 echo '<div class="container-fluid">
                             <div class="jumbotron">
-                            <h2><img src="../img/icons/actions/view-loan.png"  class="img-reponsive img-rounded" alt="img" /> Pagos [ Listado ]</h2><hr>
-                            <button type="button" class="btn btn-primary" id="new_pago" onclick="callNewPago();">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Pago</button><hr>';
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <img src="../img/icons/actions/view-loan.png"  class="img-reponsive img-rounded" alt="img" /> <strong>Pagos</strong>
+                                </div>
+                            </div><hr>
+
+                            <button type="button" class="btn btn-primary btn-sm" id="new_pago" onclick="callNewPago();">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Pago</button>
+
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalCalcularTotalMensual">
+                                <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> Calcular Total Mensual</button>
+                            <hr>';
 
 
                 echo "<table class='display compact' style='width:100%' id='pagosTable'>";
@@ -180,6 +189,75 @@ class Pagos{
                     echo '<div class="alert alert-info">
                                     <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
                                     <strong>Cantidad de Registros:</strong>  ' .$count.'
+                                </div><hr>';
+
+                    echo '</div>
+                               </div>';
+                    }else{
+                        echo 'Connection Failure...';
+                    }
+
+                mysqli_close($conn);
+
+    } // END OF FUNCTION
+
+
+    public function formCalcularTotalMensual($nPago,$fecha_desde,$fecha_hasta,$conn,$dbname){
+
+        if($conn){
+
+                /*$sql = "select monto_pagar, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio from wm_pagos where  id_servicio in (1,2,3,5,13,16) and fecha_vencimiento between '$fecha_desde' and '$fecha_hasta' group by id_servicio";*/
+
+                $sql = "with servicios as (
+                                select monto_pagar, (select descripcion from wm_servicios where id = wm_pagos.id_servicio) as servicio from wm_pagos where  id_servicio in (1,2,3,5,13,16) and fecha_vencimiento between '$fecha_desde' and '$fecha_hasta')
+                                select monto_pagar, servicio from servicios
+                                union
+                                select sum(monto_pagar), 'Total' from servicios";
+
+                mysqli_select_db($conn,$dbase);
+                $resultado = mysqli_query($conn,$sql);
+
+                //mostramos fila x fila
+                $count = 0;
+                echo '<div class="container-fluid">
+                            <div class="jumbotron">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <img src="../img/icons/actions/view-income-categories.png"  class="img-reponsive img-rounded" alt="img" />
+                                    <strong>Total Mensual Período: '.$fecha_desde.' a '.$fecha_hasta.'</strong>
+                                </div>
+                            </div><hr>';
+
+                echo "<table class='display compact' style='width:100%' id='totalMensualTable'>";
+
+
+                echo "<thead>
+                                <th class='text-nowrap text-center'><span class='label label-default'>Importe</span></th>
+                                <th class='text-nowrap text-center'><span class='label label-default'>Servicio</span></th>
+                                <th class='text-nowrap text-center'></th>
+                            </thead>";
+
+
+                while($fila = mysqli_fetch_array($resultado)){
+                        // Listado normal
+                        echo "<tr>";
+
+                        if($nPago->getIdServicio($fila['servicio']) == 'Total'){
+                            echo "<td align=center><span class='label label-success'> $".$nPago->getMontoPagar($fila['monto_pagar'])."</span></td>";
+                            echo "<td align=center><span class='label label-success'> ".$nPago->getIdServicio($fila['servicio'])."</span></td>";
+                        }else{
+                            echo "<td align=center>$".$nPago->getMontoPagar($fila['monto_pagar'])."</td>";
+                            echo "<td align=center>".$nPago->getIdServicio($fila['servicio'])."</td>";
+                        }
+                        echo '<td class="text-nowrap" align=center></td>';
+                                $count++;
+                    }
+
+                    echo "</table>";
+                    echo "<hr>";
+                    echo '<div class="alert alert-info">
+                                    <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+                                    <strong>Cantidad de Servicios a Pagar:</strong>  ' .$count.'
                                 </div><hr>';
 
                     echo '</div>
@@ -563,6 +641,44 @@ public function uploadComprobante($nPago,$id,$my_file,$conn,$dbname){
                                                         echo 4; // solo archivos pdf
 									            }
 
+
+} // END OF FUNCTION
+
+public function modalCalcularTotalMensual(){
+
+    echo '<div class="modal fade" id="myModalCalcularTotalMensual" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Calcular Total Mensual</h4>
+                    </div>
+                    <div class="modal-body">
+
+                            <form action="#" method="POST">
+                                <div class="form-group">
+                                <label for="fecha_desde">Fecha Desde:</label>
+                                <input type="date" class="form-control" id="fecha_desde" name="fecha_desde">
+                                </div>
+                                <div class="form-group">
+                                <label for="fecha_hasta">Fecha Hasta:</label>
+                                <input type="date" class="form-control" id="fecha_hasta" name="fecha_hasta">
+                                </div>
+                                <button type="submit" class="btn btn-success" name="calcular_total_mensual" onclick="callCalcularTotalMensual();">
+                                    <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> Calcular</button>
+                            </form>
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+                    </div>
+                </div>
+
+                </div>
+            </div>';
 
 } // END OF FUNCTION
 

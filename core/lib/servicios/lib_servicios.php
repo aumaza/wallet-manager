@@ -33,7 +33,12 @@ public function listServicios($nServicio,$conn,$dbname){
                 $count = 0;
                 echo '<div class="container-fluid">
                             <div class="jumbotron">
-                            <h2><img src="../img/icons/actions/view-barcode.png"  class="img-reponsive img-rounded" alt="img" /> Servicios [ Listado ]</h2><hr>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <img src="../img/icons/actions/view-barcode.png"  class="img-reponsive img-rounded" alt="img" /> <strong>Servicios</strong>
+                                </div>
+                            </div><hr>
+
                             <button type="button" class="btn btn-primary" id="new_servicio" onclick="callNewServicio();">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Servicio</button><hr>';
 

@@ -1,9 +1,11 @@
-<?php
+<?php session_start();
+            include "connection/connection.php";
+            include "core/lib/lib_system.php";
+
       	error_reporting(E_ALL ^ E_NOTICE);
       	ini_set('display_errors', 1);
 
-		include "connection/connection.php";
-		include "core/lib/lib_system.php";
+
 
 
 

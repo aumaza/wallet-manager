@@ -1,7 +1,6 @@
-<?php	session_start();
-
-		include "connection/connection.php";
-		include "core/lib/lib_system.php";
+<?php	    session_start();
+                include "connection/connection.php";
+                include "core/lib/lib_system.php";
 
 
 		if($conn){
